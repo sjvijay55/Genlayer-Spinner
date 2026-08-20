@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>GenLayer Spinner</title>
+<style>
+
+/* ============================================================
+   GENLAYER SPINNER — by vijay
+   Formats: CSS animation + SVG logo
+   Sizes:   32px (sm) | 52px (md) | 80px (lg)
+   Themes:  Light & Dark
+   Loop:    Infinite smooth
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* ---------- SPINNER BASE ---------- */
+.gl-spinner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- ROTATING ARC RING ---------- */
+.gl-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  border-top-color: #7c3aed;
+  border-right-color: #7c3aed;
+  animation: gl-spin 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* ---------- ORBIT DOTS ---------- */
+.gl-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #7c3aed;
+  animation: gl-orbit 1.1s linear infinite;
+}
+.gl-dot-2 {
+  animation-delay: -0.55s;
+  background: #a78bfa;
+  opacity: 0.75;
+}
+
+/* ---------- LOGO ICON (center) ---------- */
+.gl-logo {
+  position: relative;
+  z-index: 2;
+  animation: gl-pulse 1.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* ---------- KEYFRAMES ---------- */
+@keyframes gl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes gl-orbit {
+  from { transform: rotate(0deg)   translateX(var(--r)) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(var(--r)) rotate(-360deg); }
+}
+
+@keyframes gl-pulse {
+  0%   { transform: scale(1)    rotate(0deg);  opacity: 0.9; }
+  30%  { transform: scale(0.88) rotate(-6deg); opacity: 0.6; }
+  65%  { transform: scale(1.06) rotate(3deg);  opacity: 1;   }
+  100% { transform: scale(1)    rotate(0deg);  opacity: 0.9; }
+}
+
+/* ---------- SIZE VARIANTS ---------- */
+
+/* Small — 32px */
+.gl-spinner.sm              { width: 32px; height: 32px; }
+.gl-spinner.sm .gl-ring     { width: 32px; height: 32px; border-width: 2px; }
+.gl-spinner.sm .gl-dot      { width: 4px;  height: 4px;  --r: 13px; }
+.gl-spinner.sm .gl-logo     { width: 13px; height: 13px; }
+
+/* Medium — 52px (default) */
+.gl-spinner.md              { width: 52px; height: 52px; }
+.gl-spinner.md .gl-ring     { width: 52px; height: 52px; border-width: 2.5px; }
+.gl-spinner.md .gl-dot      { width: 6px;  height: 6px;  --r: 22px; }
+.gl-spinner.md .gl-logo     { width: 22px; height: 22px; }
+
+/* Large — 80px */
+.gl-spinner.lg              { width: 80px; height: 80px; }
+.gl-spinner.lg .gl-ring     { width: 80px; height: 80px; border-width: 3px; }
+.gl-spinner.lg .gl-dot      { width: 9px;  height: 9px;  --r: 34px; }
+.gl-spinner.lg .gl-logo     { width: 34px; height: 34px; }
+
+/* ---------- DARK THEME ---------- */
+@media (prefers-color-scheme: dark) {
+  body { background: #0f0f0f; }
+  .gl-ring     { border-top-color: #a78bfa; border-right-color: #a78bfa; }
+  .gl-dot      { background: #a78bfa; }
+  .gl-dot-2    { background: #c4b5fd; }
+}
+
+/* manual dark override class */
+.dark .gl-ring  { border-top-color: #a78bfa; border-right-color: #a78bfa; }
+.dark .gl-dot   { background: #a78bfa; }
+.dark .gl-dot-2 { background: #c4b5fd; }
+
+/* ---------- DARK MODE LOGO FIX ---------- */
+@media (prefers-color-scheme: dark) {
+  .gl-logo path { stroke: #ffffff !important; }
+}
+.dark .gl-logo path { stroke: #ffffff !important; }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     USAGE EXAMPLE — Copy the .gl-spinner block you need
+     ============================================================ -->
+
+<!-- SMALL -->
+<div class="gl-spinner sm">
+  <div class="gl-ring"></div>
+  <div class="gl-dot"></div>
+  <div class="gl-dot gl-dot-2"></div>
+  <svg class="gl-logo" viewBox="0 0 24 24" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <path stroke="#1a1a2e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"
+          d="M12 2L3 19h5l4-7 4 7h5L12 2z"/>
+    <path stroke="#1a1a2e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"
+          d="M9.5 14.5L12 10l2.5 4.5"/>
+  </svg>
+</div>
+
+<!-- MEDIUM -->
+<div class="gl-spinner md">
+  <div class="gl-ring"></div>
+  <div class="gl-dot"></div>
+  <div class="gl-dot gl-dot-2"></div>
+  <svg class="gl-logo" viewBox="0 0 24 24" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <path stroke="#1a1a2e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
+          d="M12 2L3 19h5l4-7 4 7h5L12 2z"/>
+    <path stroke="#1a1a2e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
+          d="M9.5 14.5L12 10l2.5 4.5"/>
+  </svg>
+</div>
+
+<!-- LARGE -->
+<div class="gl-spinner lg">
+  <div class="gl-ring"></div>
+  <div class="gl-dot"></div>
+  <div class="gl-dot gl-dot-2"></div>
+  <svg class="gl-logo" viewBox="0 0 24 24" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <path stroke="#1a1a2e" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"
+          d="M12 2L3 19h5l4-7 4 7h5L12 2z"/>
+    <path stroke="#1a1a2e" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"
+          d="M9.5 14.5L12 10l2.5 4.5"/>
+  </svg>
+</div>
+
+</body>
+</html>
